@@ -1,9 +1,15 @@
 var express = require('express');
-var fetch = require('fetch');
 var app = express();
 var path = require('path');
-const data = fetch('db/db.json');
-console.log(data);
+const fs = require('fs');
+
+let rawdata = fs.readFileSync('db/db.json');
+let student = JSON.parse(rawdata);
+
+console.log(student);
+
+
+
 
 app.use(express.static(__dirname + '/public'));
 
@@ -30,6 +36,8 @@ app.delete("/api/notes/:id", function(req, res) {
     let id = req.params.id;
     //load db.json into a variable
     //iterate over json
+    let key = student.id;
+    delete student[key];
     //delete the id requested
     //re write json file
     res.sendFile(path.join(__dirname, 'db', 'db.json'));
