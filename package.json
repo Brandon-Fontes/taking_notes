@@ -4,7 +4,7 @@
   "description": "will help you take notes",
   "main": "html-routes.js",
   "scripts": {
-    "start": "node Developer/htmlroutes.js",
+    "start": "node Developer/html-routes.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brandon-Fontes",
