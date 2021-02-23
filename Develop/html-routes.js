@@ -8,7 +8,7 @@ var app = express();
 app.use(bodyParser.json());
 
 let rawdata = fs.readFileSync('db/db.json');
-const student = JSON.parse(rawdata);
+var student = JSON.parse(rawdata);
 
 console.log(student);
 
@@ -54,12 +54,22 @@ app.post("/api/notes", function(req, res) {
 
 app.delete("/api/notes/:id", function(req, res) {
     let id = req.params.id;
-    //load db.json into a variable
-    //iterate over json
-    
-    //delete the id requested
-    
-    //re write json file
+    var location = 0;
+
+    student.forEach(function(obj, i){
+        if (obj.id == id){
+             location = i;
+        }
+    });
+    console.log(location);
+    student.splice(location, 1);
+    fs.writeFile('db/db.json', JSON.stringify(student) , (err) => {
+        if (err) {
+            console.log("error writing to file");
+        }
+        
+
+    });
     res.sendFile(path.join(__dirname, 'db', 'db.json'));
 });
 
